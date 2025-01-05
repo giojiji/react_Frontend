@@ -1,14 +1,16 @@
+/* eslint-disable @typescript-eslint/no-require-imports */
 import axios from "axios";
 import { editListTypes, newList } from "./apiTypes";
-import 'dotenv/config'
+require('dotenv').config()
+
 
 
 export async function getList(searchValue: string) {
   const accessToken = localStorage?.getItem("accessToken");
 
   const url = searchValue
-    ? `${process.env.BASEAPIURL}/students/?searchName=${searchValue}`
-    : `${process.env.BASEAPIURL}/students`; // Default URL if no search value
+    ? `${process.env.NEXT_PUBLIC_BASEAPIURL}/students/?searchName=${searchValue}`
+    : `${process.env.NEXT_PUBLIC_BASEAPIURL}/students`; // Default URL if no search value
 
   const response = await axios.get(url, {
     headers: {
@@ -22,7 +24,7 @@ export async function addList(data: newList) {
   const accessToken = localStorage?.getItem("accessToken");
 
   const response = await axios.post(
-    `${process.env.BASEAPIURL}/students/add`,
+    `${process.env.NEXT_PUBLIC_BASEAPIURL}/students/add`,
     data,
     {
       headers: {
@@ -37,7 +39,7 @@ export async function editList(id: number | null, data: editListTypes) {
   const accessToken = localStorage?.getItem("accessToken");
 
   const response = await axios.put(
-    `${process.env.BASEAPIURL}/students/edit/${id}`,
+    `${process.env.NEXT_PUBLIC_BASEAPIURL}/students/edit/${id}`,
     data,
     {
       headers: {
@@ -53,7 +55,7 @@ export async function deleteList(id: number) {
 
   // Use axios.delete() for the DELETE operation
   const response = await axios.delete(
-    `${process.env.BASEAPIURL}/students/remove/${id}`,
+    `${process.env.NEXT_PUBLIC_BASEAPIURL}/students/remove/${id}`,
     {
       headers: {
         Authorization: accessToken,
