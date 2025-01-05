@@ -18,4 +18,103 @@ body {
   color: var(--foreground);
   background: var(--background);
   font-family: Arial, Helvetica, sans-serif;
+  /* padding-top: 195px; */
 }
+/* 
+.mantine-DatePickerInput-levelsGroup {
+  width: 100% !important;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: white;
+}
+
+.mantine-DatePickerInput-levelsGroup div {
+  width: 100% !important;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.mantine-DatePickerInput-calendarHeader {
+  width: 100%  !important;
+  height: 50px;
+  display: flex !important;
+  justify-content: space-between !important;
+  flex-direction: row !important;
+}
+
+.mantine-DatePickerInput-calendarHeaderControl {
+  width: 20% !important;
+  height: 100% !important;
+}
+
+.mantine-DatePickerInput-calendarHeaderControl :hover {
+  background-color: chocolate !important;
+}
+
+.mantine-DatePickerInput-calendarHeaderLevel {
+  font-size: 10px !important;
+}
+
+.mantine-DatePickerInput-day[data-selected]{
+  background-color: #7048E8 !important;
+}
+
+.mantine-DatePickerInput-monthsListRow {
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+}
+
+.mantine-DatePickerInput-yearsListRow {
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+}
+
+
+.mantine-DatePickerInput-monthsList tbody {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px; 
+  padding: 10px 0;
+  background-color: aquamarine;
+}
+
+.mantine-DatePickerInput-yearsList tbody {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px; 
+  padding: 10px 0;
+  background-color: aquamarine;
+}
+
+.mantine-DatePickerInput-monthsListCell {
+  width: 30%;
+  display: flex;
+  justify-content: center;
+  align-items: center !important;
+  padding: 2px !important;
+}
+
+.mantine-DatePickerInput-yearsListCell {
+  width: 30%;
+  display: flex;
+  justify-content: center;
+  align-items: center !important;
+  padding: 2px !important;
+}
+
+.mantine-DatePickerInput-monthsListCell :hover {
+  background-color: blueviolet !important
+}
+
+.mantine-DatePickerInput-monthsListControl {
+  width: 100% !important;
+  text-align: center  !important;
+  display: flex  !important;
+  align-items: center  !important;
+  justify-content: center !important
+} */
