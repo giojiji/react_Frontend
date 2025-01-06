@@ -63,10 +63,9 @@ export default function Calendar() {
 
   const onSubmit: SubmitHandler<Inputs> = ({ fullName, startDate }) => {
     // const newId = Math.floor(Math.random() * 100000); // Generate a random ID
-
-    const formattedDate = `${startDate.getDate()}-${
+    const formattedDate = `${startDate.getFullYear()}-${
       startDate.getMonth() + 1
-    }-${startDate.getFullYear()}`;
+    }-${startDate.getDate()}`;
     if (isEdit) {
       editMutation(
         {

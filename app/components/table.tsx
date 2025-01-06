@@ -24,7 +24,7 @@ import { deleteList } from "@/app/api/userService";
 
 type Element = {
   id: number;
-  Fullname: string;
+  fullname: string;
   date: string;
 }
 
@@ -71,7 +71,7 @@ export default function MyTable(props: tableProps) {
     ?.map((element: Element) => (
       <Table.Tr key={element.id}>
         <Table.Td style={{minWidth: "50px"}}>{element.id}</Table.Td>
-        <Table.Td style={{minWidth: "200px"}}>{element.Fullname}</Table.Td>
+        <Table.Td style={{minWidth: "200px"}}>{element.fullname}</Table.Td>
         <Table.Td style={{minWidth: "200px"}}>{element.date}</Table.Td>
         <Table.Td style={{minWidth: "200px"}}><Button onClick={() => handleDelete(element.id)}>წაშლა</Button></Table.Td>
         <Table.Td style={{minWidth: "200px"}}><Button onClick={() => {props.setIsEdit(!props.isEdit); props.setEditId(element.id) }}>
