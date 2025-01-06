@@ -47,7 +47,7 @@ export default function Registration() {
 
 
     return(
-        <div className="flex flex-col justify-center items-center min-h-screen bg-slate-300">
+        <div className="flex flex-col justify-center items-center min-h-mainbody bg-slate-300">
              <form
         className="flex flex-col gap-2 items-center w-80 p-6 bg-white shadow-lg rounded-lg"
         onSubmit={handleSubmit(onSubmit)}
