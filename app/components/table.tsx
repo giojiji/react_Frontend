@@ -21,6 +21,13 @@ import { useEffect, useState } from "react";
 import useAuthRedirect from "@/app/hooks/useAuthRedirect";
 import { useList } from "@/app/api/useApi";
 import { deleteList } from "@/app/api/userService";
+import dayjs from "dayjs";
+import "dayjs/locale/ka"; // Import Georgian locale
+
+dayjs.locale("ka"); // Set locale to Georgian
+
+
+
 
 type Element = {
   id: number;
@@ -41,6 +48,9 @@ type tableProps = {
 export default function MyTable(props: tableProps) {
   useAuthRedirect();
 
+  function formatDate(dateString: string) {
+    return dayjs(dateString).format("DD MMMM, YYYY");
+  }
   
   const { data, error, isLoading, refetch } = useList(props.searchValue);
   const listA = data?.data.data; // Assuming this is the array of items.
@@ -72,7 +82,7 @@ export default function MyTable(props: tableProps) {
       <Table.Tr key={element.id}>
         <Table.Td style={{minWidth: "50px"}}>{element.id}</Table.Td>
         <Table.Td style={{minWidth: "200px"}}>{element.fullname}</Table.Td>
-        <Table.Td style={{minWidth: "200px"}}>{element.date}</Table.Td>
+        <Table.Td style={{minWidth: "200px"}}>{formatDate(element.date)}</Table.Td>
         <Table.Td style={{minWidth: "200px"}}><Button onClick={() => handleDelete(element.id)}>წაშლა</Button></Table.Td>
         <Table.Td style={{minWidth: "200px"}}><Button onClick={() => {props.setIsEdit(!props.isEdit); props.setEditId(element.id) }}>
           {props.isEdit && element.id == props.editId ? "გაუქმება" : "შეცვლა"}</Button></Table.Td>
