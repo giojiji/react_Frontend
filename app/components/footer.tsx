@@ -2,7 +2,7 @@ export const Footer = () => {
   return (
     <footer className="bg-gray-800 text-gray-200">
       {/* Main Footer Section */}
-      <div className="max-w-7xl mx-auto px-4 py-10 grid gap-8 sm:grid-cols-2 md:grid-cols-4">
+      <div className="max-w-7xl mx-auto px-4 py-8 grid gap-8 sm:grid-cols-2 md:grid-cols-4">
         {/* Company Info */}
         <div>
           <div className="flex items-center space-x-2">

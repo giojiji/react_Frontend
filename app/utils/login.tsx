@@ -73,7 +73,7 @@ export default function Login() {
 
 
   return (
-    <div className="flex flex-col justify-center items-center min-h-max bg-slate-300">
+    <div className="m-24 p-[2.5px] flex flex-col justify-center items-center min-h-max bg-slate-300">
      <form
         className="flex flex-col gap-2 items-center w-80 p-6 bg-white shadow-lg rounded-lg"
         onSubmit={handleSubmit(onSubmit)}

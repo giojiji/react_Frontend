@@ -2,8 +2,6 @@
 
 import Main from "@/app/components/main";
 import {
-  Button,
-  Group,
   MantineProvider,
   TextInput,
   Autocomplete
@@ -26,6 +24,8 @@ import { aSchema } from "../../utils/validation";
 import { Controller, SubmitHandler, useForm } from "react-hook-form";
 import { useAddList, useEditList } from "@/app/api/useApi";
 import MyTable from "@/app/components/table";
+import Button from "../../components/button";
+import "../../globals.css"
 
 type Inputs = {
   fullName: string;
@@ -105,9 +105,9 @@ export default function Calendar() {
   return (
     <Main>
       <MantineProvider>
-        <div className="min-w-full">
+        <div className="min-w-full min-h-mainbody flex flex-col flex-wrap">
           <form onSubmit={handleSubmit(onSubmit)}>
-            <Group display="flex" align="start" className="h-20">
+            <div className="h-20 flex flex-wrap items-start	 justify-start md:flex-col gap-3">
               <Controller
                 name="fullName"
                 control={control}
@@ -136,22 +136,24 @@ export default function Calendar() {
                   />
                 )}
               />
+              <div className="mt-[25px] w-48">
               {isEdit ? (
-                <Button color="blue" type="submit" className="mt-[25px]">
+                <Button  type="submit">
                   შენახვა
                 </Button>
               ) : (
-                <Button color="blue" type="submit" className="mt-[25px]">
+                <Button type="submit">
                   დამატება
                 </Button>
               )}
+              </div>
               <Autocomplete
                 placeholder="Search person"
-                className="mt-[25px]"
+                className="mt-[25px] w-48"
                 value={searchValue}
                 onChange={setSearchValue}
               />
-            </Group>
+            </div>
           </form>
           <MyTable searchValue={searchValue} editId={editId} setEditId={setEditId} isEdit={isEdit} setIsEdit={setIsEdit}
           isDataChanged={isDataChanged}
