@@ -5,16 +5,19 @@ import { useForm, SubmitHandler } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import Button from "../components/button";
 import Input from "../components/input";
-import { loginSchema } from "./validation";
+import { loginSchema } from "../utils/validation";
 import ErrorMessage from "../components/errorMessage";
-// import { credentials } from "./validCredentials";
-import SuccessMessage from "../components/successMessage";
 import { redirect } from 'next/navigation'
-// import { useRouter } from 'next/navigation'
-import store from "./reducer";
+import store from "../utils/reducer";
 import { loginData } from "../api/apiTypes";
 import { useLogin } from "../api/useApi";
 import Link from "next/link";
+import ApiErrorMessage from "../components/apiErrorMessage";
+import { AxiosError } from 'axios';
+import { useUser } from "../utils/UserContext";
+
+
+
 
 
 export default function Login() {
@@ -24,7 +27,7 @@ export default function Login() {
     const isLogin = localStorage?.getItem("accessToken")
 
     if(isLogin) {
-      redirect("/menu")
+      redirect("/students")
     }
   })
 
@@ -34,6 +37,7 @@ export default function Login() {
 
   const [login, setLogin] = useState(false)
   const [loginMessage, setLoginMessage] = useState("")
+  const { setUser } = useUser()
 
 
   const { register, handleSubmit, formState: { errors }, } = useForm<loginData>({
@@ -53,17 +57,24 @@ export default function Login() {
         store.dispatch({ type: 'LOGIN_SUCCESS' })
         setLoginMessage("success")
         const token = data.data.token
-        localStorage.setItem("accessToken", token)
+        const id = data.data.id
+        setUser(data.data)
+        localStorage.setItem("accessToken", `Bearer ${token}`)
+        localStorage.setItem("userId", id)
           setTimeout(() => {
-            redirect('/menu')
+            redirect('/students')
             // router.push('/settings')
             }, 1500)
           },
-          onError: () => {
-    setLoginMessage("invalid user")
+        onError: (error) => {
+            if (error instanceof AxiosError) {
+        setLoginMessage(error.response?.data.message)
         setTimeout(() => {
         setLoginMessage("")
         }, 3000);
+      } else {
+        setLoginMessage("An unexpected error occurred");
+      }
     }
         },
       );
@@ -73,7 +84,7 @@ export default function Login() {
 
 
   return (
-    <div className="m-24 p-[2.5px] flex flex-col justify-center items-center min-h-max bg-slate-300">
+    <div className="p-10 flex flex-col justify-center items-center min-h-mainbody bg-slate-300">
      <form
         className="flex flex-col gap-2 items-center w-80 p-6 bg-white shadow-lg rounded-lg"
         onSubmit={handleSubmit(onSubmit)}
@@ -88,10 +99,10 @@ export default function Login() {
 
         <Button>Login</Button>
 
-        {login ? <SuccessMessage message={loginMessage}/> : <ErrorMessage message={loginMessage} />}
+        {!login && <ApiErrorMessage message={loginMessage} />}
 
 
-        <Link className="text-amber-600" href="/registration">Register!</Link>
+        <Link className="text-amber-600" href="/forgotPassword">Forgot password?</Link>
 
 
       </form>

@@ -11,7 +11,7 @@ module.exports = {
   theme: {
     extend: {
       minHeight: {
-        mainbody: 'calc(100vh - 368px)',
+        mainbody: 'calc(100vh - 352px)',
       }
     },
   },

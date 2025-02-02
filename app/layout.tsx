@@ -4,6 +4,7 @@ import "./globals.css";
 import ReactQueryProvider from "./utils/providers";
 import { Header } from "./components/header";
 import { Footer } from "./components/footer";
+import { MantineProvider } from "@mantine/core";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -32,14 +33,15 @@ export default function RootLayout({
         <body
           className={`${geistSans.variable} ${geistMono.variable} antialiased`}
         >
-    
+              <MantineProvider>
+
           <Header />
                   
           <div>
             {children}
-       
             </div>
             <Footer />
+            </MantineProvider>
         </body>
       </ReactQueryProvider>
     </html>

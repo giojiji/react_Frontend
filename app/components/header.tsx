@@ -41,7 +41,7 @@ import Button from "./button";
 //   );
 // };
 
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { redirect } from "next/navigation";
 import store from "../utils/reducer";
 import {
@@ -50,10 +50,10 @@ import {
   Disclosure,
   DisclosureButton,
   DisclosurePanel,
-  Popover,
-  PopoverButton,
-  PopoverGroup,
-  PopoverPanel,
+  PopoverGroup
+  // Popover,
+  // PopoverButton,
+  // PopoverPanel,
 } from "@headlessui/react";
 import {
   ArrowPathIcon,
@@ -69,6 +69,20 @@ import {
   PhoneIcon,
   PlayCircleIcon,
 } from "@heroicons/react/20/solid";
+import { MantineProvider } from "@mantine/core";
+import  useAuth  from "../hooks/useAuth";
+import { MainAvatar } from "./avatar";
+import "@mantine/core/styles.css";
+import "@mantine/core/styles/global.css";
+import "@mantine/core/styles/Button.css";
+import "@mantine/core/styles/NavLink.css";
+import "@mantine/core/styles/Pagination.css";
+import "@mantine/core/styles/Flex.css";
+import "@mantine/core/styles/global.css";
+import "@mantine/dates/styles.css";
+import "@mantine/core/styles/Input.css";
+import "@mantine/core/styles/InlineInput.css";
+
 
 const products = [
   {
@@ -107,32 +121,21 @@ const callsToAction = [
   { name: "Contact sales", href: "#", icon: PhoneIcon },
 ];
 
+
 export const Header = () => {
+  const loginState = useAuth();
+
+
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
-  //
-  const [loginState, setLoginState] = useState(false);
-
-  // Only run this effect on the client side
-  useEffect(() => {
-    const isLogin = Boolean(localStorage.getItem("accessToken"));
-    if (isLogin) {
-      store.dispatch({ type: "LOGIN_SUCCESS" });
-      setLoginState(store.getState());
-    }
-
-    const unsubscribe = store.subscribe(() => setLoginState(store.getState()));
-    return () => unsubscribe();
-  }, []);
 
   const removeStorage = () => {
     store.dispatch({ type: "LOGOUT" });
     localStorage.removeItem("accessToken");
-    setLoginState(false);
     redirect("/");
   };
 
-  //
+  
 
   return (
     <header className="bg-white sticky top-0 shadow-md shadow-slate-400 z-50">
@@ -141,14 +144,14 @@ export const Header = () => {
         className="mx-auto flex max-w-7xl items-center justify-between p-6 lg:px-8"
       >
         <div className="flex lg:flex-1">
-          <a href="/menu" className="-m-1.5 p-1.5">
+          <Link href="/" className="-m-1.5 p-1.5">
             <span className="sr-only">Your Company</span>
             <img
               alt=""
               src="https://tailwindui.com/plus/img/logos/mark.svg?color=indigo&shade=600"
               className="h-8 w-auto"
             />
-          </a>
+          </Link>
         </div>
         <div className="flex lg:hidden">
           <button
@@ -161,7 +164,7 @@ export const Header = () => {
           </button>
         </div>
         <PopoverGroup className="hidden lg:flex lg:gap-x-12">
-          <Popover className="relative">
+          {/* <Popover className="relative">
             <PopoverButton className="flex items-center gap-x-1 text-sm/6 font-semibold text-gray-900">
               Product
               <ChevronDownIcon
@@ -215,31 +218,35 @@ export const Header = () => {
                 ))}
               </div>
             </PopoverPanel>
-          </Popover>
+          </Popover> */}
 
-          <a href="/menu/calendar" className="text-sm/6 font-semibold text-gray-900">
+          <a href="/students" className="text-sm/6 font-semibold text-gray-900">
             Students
           </a>
-          <a href="#" className="text-sm/6 font-semibold text-gray-900">
-            Test
+          <a href="/shop" className="text-sm/6 font-semibold text-gray-900">
+           Shop
           </a>
-          <a href="/settings" className="text-sm/6 font-semibold text-gray-900">
-           testSettings
+          <a href="/myorders" className="text-sm/6 font-semibold text-gray-900">
+           Orders
           </a>
         </PopoverGroup>
-        <div className="hidden lg:flex lg:flex-1 lg:justify-end gap-4">
+        <MantineProvider >
+        <div className="hidden lg:flex lg:flex-1 lg:justify-end items-center gap-4">
           {loginState ? (
             <>
               {/* <a href="/menu" className="text-sm/6 font-semibold text-gray-900">
                 Profile
               </a> */}
+              
+              <MainAvatar />
+            
               <Button onClick={removeStorage} negative>
                 Log Out
               </Button>
             </>
           ) : (
             <>
-              <Link href="/" className="text-sm/6 font-semibold text-gray-900">
+              <Link href="/login" className="text-sm/6 font-semibold text-gray-900">
                 Log in
               </Link>
               <a
@@ -251,6 +258,7 @@ export const Header = () => {
             </>
           )}
         </div>
+        </MantineProvider>
       </nav>
       <Dialog
         open={mobileMenuOpen}
@@ -260,14 +268,14 @@ export const Header = () => {
         <div className="fixed inset-0 z-10" />
         <DialogPanel className="fixed inset-y-0 right-0 z-10 w-full overflow-y-auto bg-white px-6 py-6 sm:max-w-sm sm:ring-1 sm:ring-gray-900/10">
           <div className="flex items-center justify-between">
-            <a href="/menu" className="-m-1.5 p-1.5">
+            <Link href="/" className="-m-1.5 p-1.5">
               <span className="sr-only">Your Company</span>
               <img
                 alt=""
                 src="https://tailwindui.com/plus/img/logos/mark.svg?color=indigo&shade=600"
                 className="h-8 w-auto"
               />
-            </a>
+            </Link>
             <button
               type="button"
               onClick={() => setMobileMenuOpen(false)}
@@ -302,7 +310,7 @@ export const Header = () => {
                   </DisclosurePanel>
                 </Disclosure>
                 <a
-                 href="/menu/calendar"
+                 href="/students"
                   className="-mx-3 block rounded-lg px-3 py-2 text-base/7 font-semibold text-gray-900 hover:bg-gray-50"
                 >
                   Students
@@ -337,7 +345,7 @@ export const Header = () => {
                 ) : (
                   <>
                     <Link
-                      href="/"
+                      href="/login"
                       onClick={() => {
                         setMobileMenuOpen(false);
                       }}

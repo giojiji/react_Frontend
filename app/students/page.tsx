@@ -7,9 +7,10 @@ import {
   Autocomplete
 } from "@mantine/core";
 import "@mantine/core/styles.css";
+import "@mantine/core/styles/global.css";
+import "@mantine/core/styles/Button.css";
 import "@mantine/core/styles/NavLink.css";
 import "@mantine/core/styles/Pagination.css";
-import "@mantine/core/styles/Button.css";
 import "@mantine/core/styles/Flex.css";
 import "@mantine/core/styles/global.css";
 import "@mantine/dates/styles.css";
@@ -20,19 +21,19 @@ import { useState } from "react";
 import { DatePickerInput } from "@mantine/dates";
 import useAuthRedirect from "@/app/hooks/useAuthRedirect";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { aSchema } from "../../utils/validation";
+import { aSchema } from "../utils/validation";
 import { Controller, SubmitHandler, useForm } from "react-hook-form";
 import { useAddList, useEditList } from "@/app/api/useApi";
 import MyTable from "@/app/components/table";
-import Button from "../../components/button";
-import "../../globals.css"
+import Button from "../components/button";
+import "../globals.css"
 
 type Inputs = {
   fullName: string;
   startDate: Date;
 };
 
-export default function Calendar() {
+export default function Students() {
   useAuthRedirect();
 
   const [searchValue, setSearchValue] = useState("");
